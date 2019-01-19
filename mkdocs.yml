@@ -1,0 +1,14 @@
+site_name: jma-feed
+site_description: Python client library for JMA feed.
+site_author: Tomohiro Murota
+repo_url: https://github.com/tearoom6/jma-feed
+
+theme: readthedocs
+
+nav:
+- Home: index.md
+- Advanced: advanced.md
+- About:
+  - Release Notes: about/changelog.md
+  - Contributing: about/contributing.md
+  - License: about/license.md
