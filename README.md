@@ -5,7 +5,6 @@ Python client library for JMA feed.
 This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
 [![Unix Build Status](https://img.shields.io/travis/tearoom6/jma-feed/master.svg?label=unix)](https://travis-ci.org/tearoom6/jma-feed)
-[![Windows Build Status](https://img.shields.io/appveyor/ci/tearoom6/jma-feed/master.svg?label=window)](https://ci.appveyor.com/project/tearoom6/jma-feed)
 [![Coverage Status](https://img.shields.io/coveralls/tearoom6/jma-feed/master.svg)](https://coveralls.io/r/tearoom6/jma-feed)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/tearoom6/jma-feed.svg)](https://scrutinizer-ci.com/g/tearoom6/jma-feed/?branch=master)
 [![PyPI Version](https://img.shields.io/pypi/v/jma-feed.svg)](https://pypi.org/project/jma-feed)

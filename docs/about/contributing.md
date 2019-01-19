@@ -3,7 +3,6 @@
 ## Requirements
 
 * Make:
-    * Windows: http://mingw.org/download/installer
     * Mac: http://developer.apple.com/xcode
     * Linux: http://www.gnu.org/software/make
 * Python: `$ pyenv install`
