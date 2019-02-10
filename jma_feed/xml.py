@@ -17,19 +17,25 @@ class XmlDocument:
         else:
             raise ValueError('target parameter can take only Element or URL.')
 
-    def _element(self, *xpaths):
+    def _find_element(self, *xpaths):
         for xpath in xpaths:
             element = self.root.find(xpath, self.ns_map)
             if element is not None:
-                return element
-        return None
+                return xpath, element
+        return (None, None)
 
-    def _elements(self, *xpaths):
+    def _find_elements(self, *xpaths):
         for xpath in xpaths:
             elements = self.root.findall(xpath, self.ns_map)
             if elements:
-                return elements
-        return None
+                return xpath, elements
+        return (None, None)
+
+    def _element(self, xpath):
+        return self.root.find(xpath, self.ns_map)
+
+    def _elements(self, xpath):
+        return self.root.findall(xpath, self.ns_map)
 
     def _element_text(self, xpath):
         element = self._element(xpath)

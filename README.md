@@ -86,3 +86,171 @@ for entry in entries:
     print(entry.link)
 ```
 
+Fetching reports:
+
+```python
+from jma_feed.report import Report, ReportBodyMeteorology, ReportBodySeismology, ReportBodyVolcanology
+
+link = feed.entries[0].link
+
+report = Report(link)
+
+control = report.control
+print(control.title)
+print(control.date_time)
+print(control.status)
+print(control.editorial_office)
+print(control.publishing_office)
+
+head = report.head
+print(head.title)
+print(head.report_date_time)
+print(head.target_date_time)
+print(head.event_id)
+print(head.info_type)
+print(head.serial)
+print(head.info_kind)
+print(head.info_kind_version)
+print(head.headline_text)
+for headline_information in head.headline_information_list:
+    print(headline_information.type)
+    for item in headline_information.items:
+        print(item.areas_code_type)
+        for kind in item.kinds:
+            print(kind.name)
+            print(kind.code)
+            print(kind.condition)
+        for area in item.areas:
+            print(area.name)
+            print(area.code)
+
+body = report.body
+
+# Meteorology
+if isinstance(body, ReportBodyMeteorology):
+    target_area = body.target_area
+    if target_area:
+        print(target_area.name)
+        print(target_area.code)
+    comment = body.comment
+    if comment:
+        for text in comment.texts:
+            print(text.text)
+    for notice in body.notices:
+        print(notice)
+    for warning in body.warnings:
+        for item in warning.items:
+            print(item.change_status)
+            print(item.full_status)
+            print(item.editing_mark)
+            if item.area:
+                print(item.area.name)
+                print(item.area.code)
+            for kind in item.kinds:
+                print(kind.name)
+                print(kind.code)
+                print(kind.status)
+                print(kind.condition)
+    for meteorological_info in body.meteorological_infos:
+        print(meteorological_info.date_time)
+        print(meteorological_info.duration)
+        print(meteorological_info.name)
+        for item in meteorological_info.items:
+            print(item.change_status)
+            print(item.full_status)
+            print(item.editing_mark)
+            if item.area:
+                print(item.area.name)
+                print(item.area.code)
+            for kind in item.kinds:
+                print(kind.name)
+                print(kind.code)
+                print(kind.status)
+                print(kind.condition)
+    for time_series_info in body.time_series_infos:
+        for time_define in meteorological_info.time_defines:
+            print(time_define.date_time)
+            print(time_define.duration)
+            print(time_define.name)
+        for item in meteorological_info.items:
+            print(item.change_status)
+            print(item.full_status)
+            print(item.editing_mark)
+            if item.area:
+                print(item.area.name)
+                print(item.area.code)
+            for kind in item.kinds:
+                print(kind.name)
+                print(kind.code)
+                print(kind.status)
+                print(kind.condition)
+
+# Seismology
+if isinstance(body, ReportBodySeismology):
+    print(body.naming)
+    print(body.text)
+    print(body.next_advisory)
+    comments = body.comments
+    if comments and comments.warning_comment:
+        print(comments.warning_comment.text)
+        print(comments.warning_comment.code)
+        print(comments.warning_comment.code_type)
+    if comments and comments.forecast_comment:
+        print(comments.forecast_comment.text)
+        print(comments.forecast_comment.code)
+        print(comments.forecast_comment.code_type)
+    if comments and comments.observation_comment:
+        print(comments.observation_comment.text)
+        print(comments.observation_comment.code)
+        print(comments.observation_comment.code_type)
+    if comments and comments.var_comment:
+        print(comments.var_comment.text)
+        print(comments.var_comment.code)
+        print(comments.var_comment.code_type)
+    if comments and comments.free_form_comment:
+        print(comments.free_form_comment)
+    tsunami = body.tsunami
+    for earthquake in body.earthquakes:
+        print(earthquake.origin_time)
+        print(earthquake.arrival_time)
+        print(earthquake.condition)
+        for magnitude in earthquake.magnitudes:
+            print(magnitude)
+        hypocenter = earthquake.hypocenter
+        if hypocenter:
+            print(hypocenter.source)
+            if hypocenter.area:
+                print(hypocenter.area.name)
+                print(hypocenter.area.code)
+                print(hypocenter.area.coordinate)
+
+# Volcanology
+if isinstance(body, ReportBodyVolcanology):
+    print(body.notice)
+    print(body.text)
+    for volcano_info in body.volcano_infos:
+        for item in volcano_info.items:
+            if item.kind:
+                print(item.kind.name)
+                print(item.kind.formal_name)
+                print(item.kind.code)
+                print(item.kind.condition)
+            for area in item.areas:
+                print(area.name)
+                print(area.code)
+                print(area.coordinate)
+    for ash_info in body.ash_infos:
+        print(ash_info.start_time)
+        print(ash_info.end_time)
+        for item in ash_info.items:
+            if item.kind:
+                print(item.kind.name)
+                print(item.kind.formal_name)
+                print(item.kind.code)
+                print(item.kind.condition)
+            for area in item.areas:
+                print(area.name)
+                print(area.code)
+                print(area.coordinate)
+```
+
