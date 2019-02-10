@@ -1,12 +1,9 @@
-import urllib.request
-import xml.etree.ElementTree as ET
+from jma_feed.xml import XmlDocument
 
 
-class AtomFeed:
-    def __init__(self, url):
-        xml_text = urllib.request.urlopen(url).read()
-        self.root = ET.fromstring(xml_text)
-        self.ns = {'atom': 'http://www.w3.org/2005/Atom'}
+class AtomFeed(XmlDocument):
+    def __init__(self, target):
+        super(AtomFeed, self).__init__(target, {'atom': 'http://www.w3.org/2005/Atom'})
 
     @property
     def title(self):
@@ -30,20 +27,15 @@ class AtomFeed:
 
     @property
     def entries(self):
-        elements = self.root.findall('atom:entry', self.ns)
+        elements = self._elements('atom:entry')
         return [AtomFeedEntry(element) for element in elements]
 
-    def _element_text(self, xpath):
-        element = self.root.find(xpath, self.ns)
-        if element == None:
-            return None
-        return element.text
 
-
-class AtomFeedEntry:
-    def __init__(self, element):
-        self.entry = element
-        self.ns = {'atom': 'http://www.w3.org/2005/Atom'}
+class AtomFeedEntry(XmlDocument):
+    def __init__(self, target):
+        super(AtomFeedEntry, self).__init__(
+            target, {'atom': 'http://www.w3.org/2005/Atom'}
+        )
 
     @property
     def title(self):
@@ -68,15 +60,3 @@ class AtomFeedEntry:
     @property
     def link(self):
         return self._element_attr('atom:link', 'href')
-
-    def _element_text(self, xpath):
-        element = self.entry.find(xpath, self.ns)
-        if element == None:
-            return None
-        return element.text
-
-    def _element_attr(self, xpath, attr_name):
-        element = self.entry.find(xpath, self.ns)
-        if element == None:
-            return None
-        return element.get(attr_name)
