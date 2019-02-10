@@ -36,65 +36,23 @@ $ python setup.py install
 
 After installation, the package can imported:
 
-```sh
-$ python
->>> import jma_feed
->>> jma_feed.__version__
+```python
+import jma_feed
+jma_feed.__version__
 ```
 
-## Low-level API
-
-Fetching feeds:
+Report can be retrieved from Atom feeds:
 
 ```python
-from jma_feed.feed import AtomFeed
-
-# High-frequency feed
-# Regular (定時: 気象に関する情報のうち、天気概況など定時に発表されるもの)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/regular.xml'
-# Extra (随時: 気象に関する情報のうち、警報・注意報など随時発表されるもの)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/extra.xml'
-# Earthquake/Volcano (地震火山: 地震、火山に関する情報)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/eqvol.xml'
-# Others (その他: 上記３種類のいずれにも属さないもの)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/other.xml'
-
-# Long-term feed
-# Regular (定時: 気象に関する情報のうち、天気概況など定時に発表されるもの)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/regular_l.xml'
-# Extra (随時: 気象に関する情報のうち、警報・注意報など随時発表されるもの)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/extra_l.xml'
-# Earthquake/Volcano (地震火山: 地震、火山に関する情報)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/eqvol_l.xml'
-# Others (その他: 上記３種類のいずれにも属さないもの)
-feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/other_l.xml'
-
-feed = AtomFeed(feed_url)
-
-print(feed.id)
-print(feed.title)
-print(feed.subtitle)
-print(feed.updated)
-print(feed.rights)
-entries = feed.entries
-for entry in entries:
-    print(entry.id)
-    print(entry.title)
-    print(entry.updated)
-    print(entry.author)
-    print(entry.content)
-    print(entry.link)
+all_reports = jma_feed.fetch_all_reports(long_term=False)
+all_meteorology_reports = jma_feed.fetch_all_meteorology_reports(long_term=False)
+all_seismology_reports = jma_feed.fetch_all_seismology_reports(long_term=False)
+all_volcanology_reports = jma_feed.fetch_all_volcanology_reports(long_term=False)
 ```
 
-Fetching reports:
+Report API:
 
 ```python
-from jma_feed.report import Report, ReportBodyMeteorology, ReportBodySeismology, ReportBodyVolcanology
-
-link = feed.entries[0].link
-
-report = Report(link)
-
 control = report.control
 print(control.title)
 print(control.date_time)
@@ -127,7 +85,7 @@ for headline_information in head.headline_information_list:
 body = report.body
 
 # Meteorology
-if isinstance(body, ReportBodyMeteorology):
+if isinstance(body, jma_feed.ReportBodyMeteorology):
     target_area = body.target_area
     if target_area:
         print(target_area.name)
@@ -186,7 +144,7 @@ if isinstance(body, ReportBodyMeteorology):
                 print(kind.condition)
 
 # Seismology
-if isinstance(body, ReportBodySeismology):
+if isinstance(body, jma_feed.ReportBodySeismology):
     print(body.naming)
     print(body.text)
     print(body.next_advisory)
@@ -225,7 +183,7 @@ if isinstance(body, ReportBodySeismology):
                 print(hypocenter.area.coordinate)
 
 # Volcanology
-if isinstance(body, ReportBodyVolcanology):
+if isinstance(body, jma_feed.ReportBodyVolcanology):
     print(body.notice)
     print(body.text)
     for volcano_info in body.volcano_infos:
@@ -252,5 +210,45 @@ if isinstance(body, ReportBodyVolcanology):
                 print(area.name)
                 print(area.code)
                 print(area.coordinate)
+```
+
+Feed API (Low-level API):
+
+```python
+# High-frequency feed
+# Regular (定時: 気象に関する情報のうち、天気概況など定時に発表されるもの)
+feed_url = jma_feed.FEED_URL_REGULAR_SHORT_TERM
+# Extra (随時: 気象に関する情報のうち、警報・注意報など随時発表されるもの)
+feed_url = jma_feed.FEED_URL_EXTRA_SHORT_TERM
+# Earthquake/Volcano (地震火山: 地震、火山に関する情報)
+feed_url = jma_feed.FEED_URL_EQVOL_SHORT_TERM
+# Others (その他: 上記３種類のいずれにも属さないもの)
+feed_url = jma_feed.FEED_URL_OTHER_SHORT_TERM
+
+# Long-term feed
+# Regular (定時: 気象に関する情報のうち、天気概況など定時に発表されるもの)
+feed_url = jma_feed.FEED_URL_REGULAR_LONG_TERM
+# Extra (随時: 気象に関する情報のうち、警報・注意報など随時発表されるもの)
+feed_url = jma_feed.FEED_URL_EXTRA_LONG_TERM
+# Earthquake/Volcano (地震火山: 地震、火山に関する情報)
+feed_url = jma_feed.FEED_URL_EQVOL_LONG_TERM
+# Others (その他: 上記３種類のいずれにも属さないもの)
+feed_url = jma_feed.FEED_URL_OTHER_LONG_TERM
+
+feed = jma_feed.AtomFeed(feed_url)
+
+print(feed.id)
+print(feed.title)
+print(feed.subtitle)
+print(feed.updated)
+print(feed.rights)
+entries = feed.entries
+for entry in entries:
+    print(entry.id)
+    print(entry.title)
+    print(entry.updated)
+    print(entry.author)
+    print(entry.content)
+    print(entry.link)
 ```
 
