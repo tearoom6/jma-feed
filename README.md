@@ -41,3 +41,48 @@ $ python
 >>> import jma_feed
 >>> jma_feed.__version__
 ```
+
+## Low-level API
+
+Fetching feeds:
+
+```python
+from jma_feed.feed import AtomFeed
+
+# High-frequency feed
+# Regular (定時: 気象に関する情報のうち、天気概況など定時に発表されるもの)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/regular.xml'
+# Extra (随時: 気象に関する情報のうち、警報・注意報など随時発表されるもの)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/extra.xml'
+# Earthquake/Volcano (地震火山: 地震、火山に関する情報)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/eqvol.xml'
+# Others (その他: 上記３種類のいずれにも属さないもの)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/other.xml'
+
+# Long-term feed
+# Regular (定時: 気象に関する情報のうち、天気概況など定時に発表されるもの)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/regular_l.xml'
+# Extra (随時: 気象に関する情報のうち、警報・注意報など随時発表されるもの)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/extra_l.xml'
+# Earthquake/Volcano (地震火山: 地震、火山に関する情報)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/eqvol_l.xml'
+# Others (その他: 上記３種類のいずれにも属さないもの)
+feed_url = 'http://www.data.jma.go.jp/developer/xml/feed/other_l.xml'
+
+feed = AtomFeed(feed_url)
+
+print(feed.id)
+print(feed.title)
+print(feed.subtitle)
+print(feed.updated)
+print(feed.rights)
+entries = feed.entries
+for entry in entries:
+    print(entry.id)
+    print(entry.title)
+    print(entry.updated)
+    print(entry.author)
+    print(entry.content)
+    print(entry.link)
+```
+
