@@ -14,7 +14,7 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 
 ## Requirements
 
-* Python 3.7+
+* Python 3.6+
 
 ## Installation
 
