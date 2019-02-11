@@ -27,9 +27,7 @@ class XmlDocument:
                 except (urllib.error.URLError, urllib.error.HTTPError):
                     raise ValueError('target string must be valid URL or XML string.')
         else:
-            raise ValueError(
-                'target parameter can take only Element or URL or XML string.'
-            )
+            raise ValueError('target parameter can take only Element or URL or XML string.')
 
     def _find_element(self, *xpaths):
         for xpath in xpaths:

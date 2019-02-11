@@ -38,9 +38,7 @@ def describe_feed():
         report = Report(report_sample)
         expect(report.head.info_kind) == '気象警報・注意報'
         expect(report.head.headline_information_list[0].type) == '気象警報・注意報（府県予報区等）'
-        expect(
-            report.head.headline_information_list[0].items[0].areas[0].name
-        ) == '和歌山県'
+        expect(report.head.headline_information_list[0].items[0].areas[0].name) == '和歌山県'
 
     def test_seis1_report_head(expect, report_samples):
         report_sample = report_samples[2]
@@ -52,12 +50,8 @@ def describe_feed():
         report_sample = report_samples[3]
         report = Report(report_sample)
         expect(report.head.info_kind_version) == '1.1_0'
-        expect(
-            report.head.headline_information_list[0].items[0].areas_code_type
-        ) == '火山名'
-        expect(
-            report.head.headline_information_list[0].items[0].kinds[0].name
-        ) == '降灰予報（定時）'
+        expect(report.head.headline_information_list[0].items[0].areas_code_type) == '火山名'
+        expect(report.head.headline_information_list[0].items[0].kinds[0].name) == '降灰予報（定時）'
 
     def test_mete1_report_body(expect, report_samples):
         report_sample = report_samples[0]

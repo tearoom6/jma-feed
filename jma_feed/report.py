@@ -30,9 +30,7 @@ class Report(XmlDocument):
 
     @property
     def body(self):
-        xpath, element = self._find_element(
-            'jmx_mete:Body', 'jmx_seis:Body', 'jmx_volc:Body'
-        )
+        xpath, element = self._find_element('jmx_mete:Body', 'jmx_seis:Body', 'jmx_volc:Body')
         if xpath == 'jmx_mete:Body':
             return ReportBodyMeteorology(element)
         if xpath == 'jmx_seis:Body':
@@ -149,16 +147,12 @@ class ReportBodyMeteorology(XmlDocument):
 
     @property
     def meteorological_infos(self):
-        elements = self._elements(
-            'jmx_mete:MeteorologicalInfos/jmx_mete:MeteorologicalInfo'
-        )
+        elements = self._elements('jmx_mete:MeteorologicalInfos/jmx_mete:MeteorologicalInfo')
         return [MeteorologicalInfo(element) for element in elements]
 
     @property
     def time_series_infos(self):
-        elements = self._elements(
-            'jmx_mete:MeteorologicalInfos/jmx_mete:TimeSeriesInfo'
-        )
+        elements = self._elements('jmx_mete:MeteorologicalInfos/jmx_mete:TimeSeriesInfo')
         return [TimeSeriesInfo(element) for element in elements]
 
 

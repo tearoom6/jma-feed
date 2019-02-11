@@ -37,9 +37,7 @@ class AtomFeedEntry(XmlDocument):
     """Model class which represents Atom feed each entry."""
 
     def __init__(self, target):
-        super(AtomFeedEntry, self).__init__(
-            target, {'atom': 'http://www.w3.org/2005/Atom'}
-        )
+        super(AtomFeedEntry, self).__init__(target, {'atom': 'http://www.w3.org/2005/Atom'})
 
     @property
     def title(self):

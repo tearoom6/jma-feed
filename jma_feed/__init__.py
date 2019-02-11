@@ -68,9 +68,7 @@ def fetch_all_reports(long_term=False):
 
 def fetch_all_certain_type_reports(long_term=False, report_type=ReportBodyMeteorology):
     return [
-        report
-        for report in fetch_all_reports(long_term)
-        if isinstance(report.body, report_type)
+        report for report in fetch_all_reports(long_term) if isinstance(report.body, report_type)
     ]
 
 
