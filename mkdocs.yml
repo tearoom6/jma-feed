@@ -5,7 +5,7 @@ repo_url: https://github.com/tearoom6/jma-feed
 
 theme: readthedocs
 
-nav:
+pages:
 - Home: index.md
 - Advanced: advanced.md
 - About:
