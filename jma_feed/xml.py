@@ -3,7 +3,15 @@ import xml.etree.ElementTree as ET
 
 
 class XmlDocument:
+    """Model class which represents XML document / element."""
+
     def __init__(self, target, ns_map):
+        """Initialize class.
+
+        Args:
+            target (ElementTree.Element or str): XML element or URL
+        """
+
         self.ns_map = ns_map
 
         if isinstance(target, ET.Element):

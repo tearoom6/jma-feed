@@ -13,6 +13,8 @@ JMX_NS_MAP = {
 
 
 class Report(XmlDocument):
+    """Model class which represents JMA report."""
+
     def __init__(self, target):
         super(Report, self).__init__(target, JMX_NS_MAP)
 
@@ -41,6 +43,8 @@ class Report(XmlDocument):
 
 
 class ReportControl(XmlDocument):
+    """Model class which represents JMA control part."""
+
     def __init__(self, target):
         super(ReportControl, self).__init__(target, JMX_NS_MAP)
 
@@ -66,6 +70,8 @@ class ReportControl(XmlDocument):
 
 
 class ReportHead(XmlDocument):
+    """Model class which represents JMA head part."""
+
     def __init__(self, target):
         super(ReportHead, self).__init__(target, JMX_NS_MAP)
 
@@ -112,6 +118,8 @@ class ReportHead(XmlDocument):
 
 
 class ReportBodyMeteorology(XmlDocument):
+    """Model class which represents JMA meteorology body part."""
+
     def __init__(self, target):
         super(ReportBodyMeteorology, self).__init__(target, JMX_NS_MAP)
 
@@ -155,6 +163,8 @@ class ReportBodyMeteorology(XmlDocument):
 
 
 class ReportBodySeismology(XmlDocument):
+    """Model class which represents JMA seismology body part."""
+
     def __init__(self, target):
         super(ReportBodySeismology, self).__init__(target, JMX_NS_MAP)
 
@@ -191,6 +201,8 @@ class ReportBodySeismology(XmlDocument):
 
 
 class ReportBodyVolcanology(XmlDocument):
+    """Model class which represents JMA volcanology body part."""
+
     def __init__(self, target):
         super(ReportBodyVolcanology, self).__init__(target, JMX_NS_MAP)
 

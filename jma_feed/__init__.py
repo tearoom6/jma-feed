@@ -31,11 +31,23 @@ FEED_URL_OTHER_LONG_TERM = 'http://www.data.jma.go.jp/developer/xml/feed/other_l
 
 
 def fetch_reports(feed_url):
+    """Fetch JMA reports which are listed in feed.
+
+    Args:
+        feed_url (str): URL of JMA feed
+    """
+
     feed = AtomFeed(feed_url)
     return [Report(entry.link) for entry in feed.entries]
 
 
 def fetch_all_reports(long_term=False):
+    """Fetch all JMA reports.
+
+    Args:
+        long_term (bool): true if use long-term feeds
+    """
+
     if long_term:
         feed_urls = [
             FEED_URL_REGULAR_LONG_TERM,
@@ -63,12 +75,30 @@ def fetch_all_certain_type_reports(long_term=False, report_type=ReportBodyMeteor
 
 
 def fetch_all_meteorology_reports(long_term=False):
+    """Fetch all JMA meteorology reports.
+
+    Args:
+        long_term (bool): true if use long-term feeds
+    """
+
     return fetch_all_certain_type_reports(long_term, ReportBodyMeteorology)
 
 
 def fetch_all_seismology_reports(long_term=False):
+    """Fetch all JMA seismology reports.
+
+    Args:
+        long_term (bool): true if use long-term feeds
+    """
+
     return fetch_all_certain_type_reports(long_term, ReportBodySeismology)
 
 
 def fetch_all_volcanology_reports(long_term=False):
+    """Fetch all JMA volcanology reports.
+
+    Args:
+        long_term (bool): true if use long-term feeds
+    """
+
     return fetch_all_certain_type_reports(long_term, ReportBodyVolcanology)

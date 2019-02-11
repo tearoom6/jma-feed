@@ -2,6 +2,8 @@ from jma_feed.xml import XmlDocument
 
 
 class AtomFeed(XmlDocument):
+    """Model class which represents Atom feed."""
+
     def __init__(self, target):
         super(AtomFeed, self).__init__(target, {'atom': 'http://www.w3.org/2005/Atom'})
 
@@ -32,6 +34,8 @@ class AtomFeed(XmlDocument):
 
 
 class AtomFeedEntry(XmlDocument):
+    """Model class which represents Atom feed each entry."""
+
     def __init__(self, target):
         super(AtomFeedEntry, self).__init__(
             target, {'atom': 'http://www.w3.org/2005/Atom'}
