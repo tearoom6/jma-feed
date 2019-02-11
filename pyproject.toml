@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "jma_feed"
-version = "0.0"
+version = "0.9.0"
 description = "Python client library for JMA feed."
 
 license = "MIT"
