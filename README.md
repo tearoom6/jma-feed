@@ -1,12 +1,13 @@
-# Overview
+# jma-feed
 
-Python client library for JMA feed.
+Python client library for [JMA feed](http://xml.kishou.go.jp/xmlpull.html).
 
 This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
 [![Unix Build Status](https://img.shields.io/travis/tearoom6/jma-feed/master.svg?label=unix)](https://travis-ci.org/tearoom6/jma-feed)
 [![Coverage Status](https://img.shields.io/coveralls/tearoom6/jma-feed/master.svg)](https://coveralls.io/r/tearoom6/jma-feed)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/tearoom6/jma-feed.svg)](https://scrutinizer-ci.com/g/tearoom6/jma-feed/?branch=master)
+[![Documentation Status](https://img.shields.io/readthedocs/jma-feed/latest.svg)](https://jma-feed.readthedocs.io/en/latest/?badge=latest)
 [![PyPI Version](https://img.shields.io/pypi/v/jma-feed.svg)](https://pypi.org/project/jma-feed)
 [![PyPI License](https://img.shields.io/pypi/l/jma-feed.svg)](https://pypi.org/project/jma-feed)
 
