@@ -25,9 +25,11 @@ class XmlDocument:
                     xml_text = urllib.request.urlopen(target).read()
                     self.root = ET.fromstring(xml_text)
                 except (urllib.error.URLError, urllib.error.HTTPError):
-                    pass
+                    raise ValueError('target string must be valid URL or XML string.')
         else:
-            raise ValueError('target parameter can take only Element or URL or XML string.')
+            raise ValueError(
+                'target parameter can take only Element or URL or XML string.'
+            )
 
     def _find_element(self, *xpaths):
         for xpath in xpaths:
