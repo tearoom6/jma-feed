@@ -1,3 +1,4 @@
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -18,12 +19,15 @@ class XmlDocument:
             self.root = target
         elif isinstance(target, str):
             try:
-                xml_text = urllib.request.urlopen(target).read()
-                self.root = ET.fromstring(xml_text)
-            except ValueError:
-                pass
+                self.root = ET.fromstring(target)
+            except ET.ParseError:
+                try:
+                    xml_text = urllib.request.urlopen(target).read()
+                    self.root = ET.fromstring(xml_text)
+                except (urllib.error.URLError, urllib.error.HTTPError):
+                    pass
         else:
-            raise ValueError('target parameter can take only Element or URL.')
+            raise ValueError('target parameter can take only Element or URL or XML string.')
 
     def _find_element(self, *xpaths):
         for xpath in xpaths:
